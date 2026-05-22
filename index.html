@@ -454,11 +454,22 @@
       comentario:     data.get('q_comentario')     || '',
     };
 
-    console.log('Respuestas encuesta:', result);
-    // Aquí puedes hacer fetch() a tu backend o Google Sheets
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw9fFlWcZJdgO9lY2iOt2ojPSOlxFHEnscswjwR-kEj3HVkTbVF_9xUnTOb_BunHN1C/exec';
 
-    this.style.display = 'none';
-    document.getElementById('thankYou').style.display = 'block';
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(result)
+    })
+    .then(() => {
+      this.style.display = 'none';
+      document.getElementById('thankYou').style.display = 'block';
+    })
+    .catch(() => {
+      this.style.display = 'none';
+      document.getElementById('thankYou').style.display = 'block';
+    });
   });
 </script>
 </body>
